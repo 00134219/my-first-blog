@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-p4x_hw(j(vtdrgs74h5x@5cc6227lc9jxlgqd0a+2##wraaf2e
 DEBUG = True
 # ALLOWED＿HOSTSにはWebサービスを提供するドメイン名をリストで指定するわけだが、
 #  ['127.0.0.1', '.pythonanywhere.com']で入れると権限がないですエラーが出た。文字列だから問題ないんじゃないの？
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'vash.pythonanywhere.com']
 
 
 # Application definition

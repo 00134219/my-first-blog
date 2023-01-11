@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+# チュートリアルで以下は入れてないが、これ入れないとNameError: name 'include' is not definedが出るので、いれた。
+from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('blog.urls')),
 ]

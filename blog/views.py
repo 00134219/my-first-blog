@@ -4,6 +4,7 @@ from django.utils import timezone
 # iews.pyと models.pyは、同じディレクトリに置いてあるから、ドット入れるだけで問題なし。
 # そして、モデルの名前を指定してインポート（今回はPost）。
 from .models import Post
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 
@@ -17,4 +18,8 @@ def post_list(request):
   # シングルクォート で囲まれて、'posts' になっていますよね。こちらが名前で、後ろの方の posts は値、クエリセットのこと.
   # クエリセットとは、モデルの中のオブジェクトのリストのこと。
   return render(request, 'blog/post_list.html', {'posts': posts})
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post': post})
 

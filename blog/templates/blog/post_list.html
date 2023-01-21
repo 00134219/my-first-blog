@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <title>My first blog</title>
-  </head>
-  <body>
-    <div>
-      <h1><a href="/">Django Girls Blog</a></h1>
-    </div>
-    
-    {% for post in posts%}
-      <div>
+{% extends 'blog/base.html' %}
+
+{% comment %} 追加するblockタグは base.html ファイル中のタグにマッチしてほしいですよね。
+ また、blockタグにはcontentブロックに属するすべてのコードを含めたいですよね。
+ そうするには、すべてを {% block content %} と {% endblock %} の間に入れてあげればよいです。 {% endcomment %}
+{% block content %}
+  {% for post in posts %}
+    <div class="post">
+      <div class="date">
         <p>published: {{ post.published_date }}</p>
-        <h2><a href="">{{ post.title }}</a></h2>
-        <p>{{ post.text|linebreaksbr }}</p>
       </div>
-    {% endfor %}
-  </body>
-</html>
+      <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+      {% comment %}  |linebreaksbr はpostのテキスト中の改行を段落に変換するフィルタに通すという意味 {% endcomment %}
+      <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}

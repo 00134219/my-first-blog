@@ -5,7 +5,6 @@
     <title>My first blog</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    {% comment %} この１行は Lobster というフォントをGoogle Fonts (https://www.google.com/fonts) から読み込むということを意味しています {% endcomment %}
     <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin-ext" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
   </head>
@@ -16,11 +15,11 @@
       {% endif %}
       <h1><a href="/">Django Girls Blog</a></h1>
     </div>
-    
+    {% comment %} ただblockを作っただけ。{% block %} テンプレートタグを、これからHTMLを挿入しようとする場所に使った。 {% endcomment %}
     <div class="content container">
       <div class="row">
         <div class="col-md-8">
-        {% comment %} ただblockを作っただけ。{% block %} テンプレートタグを、これからHTMLを挿入しようとする場所に使った。 {% endcomment %}
+
           {% block content %}
           {% endblock %}
         </div>

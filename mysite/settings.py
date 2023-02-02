@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    # django.contrib.staticfiles アプリケーションがスタティックファイルを処理します。
+    # そして、スタティックファイルの URL として /static/ が登録されています。
+    # これを利用するためには、まずアプリケーションディレクトリ内に static という名前のディレクトリを作成します。
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig'
 ]
@@ -122,6 +125,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+# STATIC_ROOTは読み込んだファイルをまとめて出力する先
+# STATICFILES_DIRSはCSSファイル等を読み込む先
+# STATIC_URLはブラウザからアクセスするための相対URL
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 

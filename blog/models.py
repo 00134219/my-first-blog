@@ -49,16 +49,13 @@ class Post(models.Model):
   def __str__(self):
     return self.title
 
+# 知識の技
 class Comment(models.Model):
-    post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')
-    author = models.CharField(max_length=200)
-    text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
-    approved_comment = models.BooleanField(default=False)
-
-    def approve(self):
-        self.approved_comment = True
-        self.save()
-
-    def __str__(self):
-        return self.text
+    """記事に紐づくコメント"""
+    name = models.CharField('名前', max_length=255, default='名無し')
+    text = models.TextField('本文')
+    target = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='対象記事')
+    created_at = models.DateTimeField('作成日', default=timezone.now)
+ 
+    def __str__(self): 
+        return self.text[:20]

@@ -9,6 +9,11 @@ from .forms import PostForm
 from django.shortcuts import redirect
 from django.views import generic
 from .models import Comment
+from .forms import PostForm
+# 知識の技
+from .forms import CommentCreateForm
+from django import forms
+
 
 # Create your views here.
 
@@ -54,4 +59,37 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
 
-
+# 知識の技
+# コメント投稿ページのビュー
+class CommentCreate(generic.CreateView):
+    """コメント投稿ページのビュー"""
+    template_name = 'comment_form.html'
+    model = Comment
+    form_class = CommentCreateForm
+ 
+#  フォームに入力された情報が正しい場合の処理
+    def form_valid(self, form):
+        post_pk = self.kwargs['pk']
+        post = get_object_or_404(Post, pk=post_pk)
+        comment = form.save(commit=False)
+        comment.target = post
+        comment.save()
+        return redirect('post:detail', pk=post_pk)
+ 
+#  htmlテンプレートに渡すデータを定義
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['post'] = get_object_or_404(Post, pk=self.kwargs['pk'])
+        return context
+      
+      # 知識の技
+def PostDetail(request, pk):
+        """Article page"""
+        detail = get_object_or_404(Post, pk=pk)
+ 
+        context = {
+          "detail": detail,
+          "comments": Comment.objects.filter(target=detail.id)   #該当記事のコメントだけを渡します。
+           }
+        
+      
